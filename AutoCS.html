@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Auto CS - Makina në Shitje</title>
+  <meta name="description" content="Makina në shitje nga Auto CS, Gjirokastër. Shiko ofertat tona dhe porosit makinën tënde.">
+  <style>
+    :root {
+      --accent: #0b6cf0;
+      --dark: #1a1a1a;
+      --muted: #6b7280;
+      --card: #fff;
+      --radius: 12px;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin:0;
+      background:#f6f7fb;
+      color:var(--dark);
+    }
+    header {
+      display:flex;justify-content:space-between;align-items:center;
+      padding:16px 28px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    }
+    .logo {font-weight:800;font-size:22px;color:var(--accent);}
+    nav a {margin-left:18px;color:var(--dark);text-decoration:none;font-weight:600}
+    .container {max-width:1100px;margin:0 auto;padding:28px;}
+    h1 {margin-top:0;}
+    /* Cars */
+    .cars {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .car {background:var(--card);padding:14px;border-radius:var(--radius);position:relative;box-shadow:0 4px 14px rgba(0,0,0,0.06)}
+    .car img {width:100%;border-radius:8px;height:180px;object-fit:cover}
+    .car h3 {margin:10px 0 6px}
+    .price {font-weight:bold;color:var(--accent);font-size:18px}
+    .badge {
+      position:absolute;top:12px;left:12px;background:red;color:#fff;
+      padding:4px 8px;border-radius:6px;font-size:13px;font-weight:bold;
+    }
+    /* Contact */
+    .contact {margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .contact form {background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 4px 14px rgba(0,0,0,0.06)}
+    .field {margin-bottom:12px;display:flex;flex-direction:column}
+    .field label {font-size:13px;margin-bottom:6px;color:var(--muted)}
+    .field input,.field textarea {padding:10px;border:1px solid #ddd;border-radius:8px}
+    .btn {background:var(--accent);color:#fff;padding:10px 16px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+    .info {background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 4px 14px rgba(0,0,0,0.06)}
+    footer {text-align:center;padding:20px;color:var(--muted);margin-top:30px;font-size:14px}
+    @media(max-width:700px){.contact{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Auto CS</div>
+    <nav>
+      <a href="#cars">Makina</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 id="cars">Makina në Shitje</h1>
+    <div class="cars">
+      <!-- Makina 1 -->
+      <div class="car">
+        <img src="cars/audi.jpg" alt="Audi A4 2015">
+        <h3>Audi A4 2015</h3>
+        <p>2.0 TDI · 120.000 km · Manuale</p>
+        <p class="price">€ 8,500</p>
+      </div>
+
+      <!-- Makina 2 (e shitur) -->
+      <div class="car sold">
+        <img src="cars/golf.jpg" alt="VW Golf 7 2016">
+        <div class="badge">E Shitur</div>
+        <h3>VW Golf 7 2016</h3>
+        <p>1.6 TDI · 150.000 km · Manuale</p>
+        <p class="price">€ 9,900</p>
+      </div>
+      
+      <!-- Shto makina të tjera duke kopjuar këtë bllok -->
+    </div>
+
+    <!-- Kontakt -->
+    <section id="contact" class="contact">
+      <form onsubmit="sendEmail(event)">
+        <h2>Porosit një makinë</h2>
+        <div class="field">
+          <label>Emri</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="field">
+          <label>Telefoni</label>
+          <input type="text" id="phone" required>
+        </div>
+        <div class="field">
+          <label>Makina që kërkon</label>
+          <textarea id="message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn">Dërgo</button>
+      </form>
+      <div class="info">
+        <h2>Kontakto Auto CS</h2>
+        <p><strong>Tel 1:</strong> +355 683004033</p>
+        <p><strong>Tel 2:</strong> +355 682158776</p>
+        <p><strong>Email:</strong> Autocs2005@gmail.com</p>
+        <p><strong>Adresa:</strong> Gjirokastër, Kordhoc</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    ©️ <span id="year"></span> Auto CS · Të gjitha të drejtat e rezervuara
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    function sendEmail(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value;
+      const email=document.getElementById('email').value;
+      const phone=document.getElementById('phone').value;
+      const msg=document.getElementById('message').value;
+      const subject=encodeURIComponent("Porosi Makine - Auto CS");
+      const body=encodeURIComponent(Emri: ${name}\nEmail: ${email}\nTel: ${phone}\n\nMakina:\n${msg});
+      window.location.href=mailto:Autocs2005@gmail.com?subject=${subject}&body=${body};
+    }
+  </script>
+</body>
+</html>
